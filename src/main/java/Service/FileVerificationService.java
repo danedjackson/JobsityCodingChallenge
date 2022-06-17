@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 
 public class FileVerificationService {
 
-    private String[] acceptableStringInput = {"F"};
-
     public List<Player> createPlayerList(List<FileInput> rawData) {
 
         List<Player> playerList = new ArrayList<>();
@@ -30,23 +28,26 @@ public class FileVerificationService {
         for(String name : distinctPlayers){
             Player player = new Player();
             player.setName(name);
-            //player.setPinfalls(validatePinfallInputs(name, rawData));
+            player.setPinfalls(validatePinfallInputs(name, rawData));
+            System.out.println(player);
             playerList.add(player);
         }
 
         return playerList;
     }
 
-    public List<String> validatePinfallInputs(String name, Map<String, String> data) {
-        System.out.println(data);
+    public List<String> validatePinfallInputs(String name, List<FileInput> data) {
         List<String> pinfalls = new ArrayList<>();
-        for (Map.Entry<String, String> element : data.entrySet()) {
-            if(element.getKey().equalsIgnoreCase(name)) {
-                element.setValue(element.getValue().toLowerCase() == "f" ? "0": element.getValue());
+        //Checking the pinfall values for each name
+        for (FileInput element : data) {
+            if(element.getName().equalsIgnoreCase(name)) {
+                //Set pinfall value to 0 if "F" is input
+                if (element.getPinfall().equalsIgnoreCase("f")) element.setPinfall("0");
+                //Trying to parse integer from pinfall value
                 try {
-                    Integer value = Integer.parseInt(element.getValue());
+                    Integer value = Integer.parseInt(element.getPinfall());
                     if ((value >= 0 && value <= 10)) {
-                        pinfalls.add(element.getValue());
+                        pinfalls.add(element.getPinfall());
                     }
                     //Handle if value is invalid here
                 } catch (NumberFormatException e) {
