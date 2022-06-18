@@ -51,19 +51,27 @@ public class Bowler implements IPlayer {
     @Override
     public List<Integer> calculateScore() {
         List<Integer> scores = new ArrayList<>();
+        Integer runningScore = 0;
         for(int i = 0; i < pinfalls.size() - 1; i++) {
             if(10 - Integer.parseInt(pinfalls.get(i)) == 0) {
                 //Strike
                 scoringFrame.add(new ScoringFrame(" ", "X"));
-
+                for(int x = 0; x < 3; x++) {
+                    runningScore += Integer.parseInt(pinfalls.get(i + x));
+                }
+                scores.add(runningScore);
             }
             else if(10 - (Integer.parseInt(pinfalls.get(i)) + Integer.parseInt(pinfalls.get(i+1))) == 0) {
                 //Spare
                 scoringFrame.add(new ScoringFrame(String.valueOf(pinfalls.get(i)), "/"));
+                runningScore += 10+Integer.parseInt(pinfalls.get(i + 2));
+                scores.add(runningScore);
                 i++;
             }
             else {
                 scoringFrame.add(new ScoringFrame(pinfalls.get(i), pinfalls.get(i+1)));
+                runningScore += Integer.parseInt(pinfalls.get(i)) + Integer.parseInt(pinfalls.get(i + 1));
+                scores.add(runningScore);
                 i++;
             }
 
