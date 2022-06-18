@@ -1,7 +1,6 @@
 package main.java.Service;
 
 import main.java.Model.FileInput;
-import main.java.Model.Player;
 
 import java.io.File;
 import java.io.FileNotFoundException;

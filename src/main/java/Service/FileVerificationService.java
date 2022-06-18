@@ -1,19 +1,18 @@
 package main.java.Service;
 
 import main.java.Model.FileInput;
-import main.java.Model.Player;
+import main.java.Model.Bowler;
+import main.java.Model.ScoringFrame;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FileVerificationService {
 
-    public List<Player> createPlayerList(List<FileInput> rawData) {
+    public List<Bowler> createBowlerList(List<FileInput> rawData) {
 
-        List<Player> playerList = new ArrayList<>();
+        List<Bowler> bowlerList = new ArrayList<>();
 
         //Getting the name values from the raw data
         List<String> names = new ArrayList<>();
@@ -26,14 +25,15 @@ public class FileVerificationService {
 
         //Building player objects from data provided
         for(String name : distinctPlayers){
-            Player player = new Player();
-            player.setName(name);
-            player.setPinfalls(validatePinfallInputs(name, rawData));
-            System.out.println(player);
-            playerList.add(player);
+            Bowler bowler = new Bowler(new ArrayList<>());
+            bowler.setName(name);
+            bowler.setPinfalls(validatePinfallInputs(name, rawData));
+            bowler.setScores(bowler.calculateScore());
+            System.out.println(bowler);
+            bowlerList.add(bowler);
         }
 
-        return playerList;
+        return bowlerList;
     }
 
     public List<String> validatePinfallInputs(String name, List<FileInput> data) {
@@ -42,6 +42,7 @@ public class FileVerificationService {
         for (FileInput element : data) {
             if(element.getName().equalsIgnoreCase(name)) {
                 //Set pinfall value to 0 if "F" is input
+                //TODO:(not sure if I want to change this, possibly have a static function to filter Fouls later
                 if (element.getPinfall().equalsIgnoreCase("f")) element.setPinfall("0");
                 //Trying to parse integer from pinfall value
                 try {
@@ -49,7 +50,7 @@ public class FileVerificationService {
                     if ((value >= 0 && value <= 10)) {
                         pinfalls.add(element.getPinfall());
                     }
-                    //Handle if value is invalid here
+                    //TODO:Handle if value is invalid here
                 } catch (NumberFormatException e) {
                     System.out.println("Failed to parse pinfall value.");
                 }
