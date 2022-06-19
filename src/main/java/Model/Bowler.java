@@ -11,6 +11,8 @@ public class Bowler implements IPlayer {
     private List<Integer> scores;
     private List<ScoringFrame> scoringFrame;
 
+    static final Integer MAX_PINS = 10;
+
     public Bowler(List<ScoringFrame> scoringFrame){
         this.scoringFrame = scoringFrame;
     }
@@ -39,6 +41,14 @@ public class Bowler implements IPlayer {
         this.scores = scores;
     }
 
+    public List<ScoringFrame> getScoringFrame() {
+        return scoringFrame;
+    }
+
+    public void setScoringFrame(List<ScoringFrame> scoringFrame) {
+        this.scoringFrame = scoringFrame;
+    }
+
     @Override
     public String toString() {
         return "Bowler{" +
@@ -53,18 +63,20 @@ public class Bowler implements IPlayer {
         List<Integer> scores = new ArrayList<>();
         Integer runningScore = 0;
         for(int i = 0; i < pinfalls.size() - 1; i++) {
-            if(10 - Integer.parseInt(pinfalls.get(i)) == 0) {
+            if(MAX_PINS - Integer.parseInt(pinfalls.get(i)) == 0) {
                 //Strike
                 scoringFrame.add(new ScoringFrame(" ", "X"));
                 for(int x = 0; x < 3; x++) {
-                    runningScore += Integer.parseInt(pinfalls.get(i + x));
+                    if( i + x <= pinfalls.size() -1 ) {
+                        runningScore += Integer.parseInt(pinfalls.get(i + x));
+                    }
                 }
                 scores.add(runningScore);
             }
-            else if(10 - (Integer.parseInt(pinfalls.get(i)) + Integer.parseInt(pinfalls.get(i+1))) == 0) {
+            else if(MAX_PINS - (Integer.parseInt(pinfalls.get(i)) + Integer.parseInt(pinfalls.get(i+1))) == 0) {
                 //Spare
                 scoringFrame.add(new ScoringFrame(String.valueOf(pinfalls.get(i)), "/"));
-                runningScore += 10+Integer.parseInt(pinfalls.get(i + 2));
+                runningScore += MAX_PINS + Integer.parseInt(pinfalls.get(i + 2));
                 scores.add(runningScore);
                 i++;
             }
@@ -77,38 +89,8 @@ public class Bowler implements IPlayer {
 
         }
 
-        scoringFrame.forEach(frame -> System.out.println(frame));
+//        scoringFrame.forEach(frame -> System.out.println(frame));
         return scores;
     }
 
-//    @Override
-//    public List<Integer> calculateScore() {
-//        List<Integer> scores = new ArrayList<>();
-//        int frameScore = 0;
-//        //Calculating total points for each round
-//        for(int x = 0; x < pinfalls.size()-1; x++) {
-//            Integer value = Integer.parseInt(pinfalls.get(x));
-//            int pins = 10;
-//            if ((pins - value) == 0){
-//                //Strike
-//                for(int i = x; i < x+3; i++) {
-//                    frameScore = frameScore + Integer.parseInt(pinfalls.get(i));
-//                }
-//                scores.add(frameScore);
-//                frameScore = 0;
-//            }
-//            else if ((pins - (value + Integer.parseInt(pinfalls.get(x+1)))) == 0){
-//                //Spare
-//                for(int y = x; y < x+1; y++) {
-//                    frameScore = frameScore + Integer.parseInt(pinfalls.get(y));
-//                }
-//                scores.add(frameScore);
-//                frameScore = 0;
-//            }
-//            else {
-//                scores.add(value + Integer.parseInt(pinfalls.get(x + 1)));
-//            }
-//        }
-//        return scores;
-//    }
 }

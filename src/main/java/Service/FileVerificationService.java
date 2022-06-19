@@ -29,7 +29,7 @@ public class FileVerificationService {
             bowler.setName(name);
             bowler.setPinfalls(validatePinfallInputs(name, rawData));
             bowler.setScores(bowler.calculateScore());
-            System.out.println(bowler);
+//            System.out.println(bowler);
             bowlerList.add(bowler);
         }
 
@@ -51,8 +51,13 @@ public class FileVerificationService {
                         pinfalls.add(element.getPinfall());
                     }
                     //TODO:Handle if value is invalid here
+                    else {
+                        throw new IllegalArgumentException(
+                                "Could not load the selected file due to incorrect inputs.");
+                    }
                 } catch (NumberFormatException e) {
-                    System.out.println("Failed to parse pinfall value.");
+                    throw new NumberFormatException(
+                            "Could not load the selected file due to incorrect inputs.");
                 }
             }
         }
