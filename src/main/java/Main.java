@@ -4,7 +4,7 @@ import main.java.Model.Bowler;
 import main.java.Service.BowlerDataService;
 import main.java.Service.FileReaderService;
 import main.java.Service.ConsoleWriterService;
-import main.java.Service.PromptService;
+import main.java.Service.UserPromptService;
 import main.java.Service.Validation.FrameSizeValidator;
 import main.java.Service.Validation.PinfallContentValidator;
 
@@ -14,9 +14,10 @@ public class Main {
     public static void main(String args[]) {
 
         //Prompt user to enter file path for processing
-        PromptService promptService = new PromptService();
-        FileReaderService reader = new FileReaderService(promptService.readFilePath());
+        UserPromptService userPromptService = new UserPromptService();
+        FileReaderService reader = new FileReaderService(userPromptService.readFilePath());
 
+        //Initializing validators
         FrameSizeValidator frameSizeValidator = new FrameSizeValidator();
         PinfallContentValidator pinfallContentValidator = new PinfallContentValidator();
 
