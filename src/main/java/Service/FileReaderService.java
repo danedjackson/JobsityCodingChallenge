@@ -1,20 +1,22 @@
 package main.java.Service;
 
+import main.java.Interface.IReader;
 import main.java.Model.FileInput;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class ReaderService {
+public class FileReaderService implements IReader {
     private String filePath;
 
-    public ReaderService(String filePath) {
+    public FileReaderService(String filePath) {
 
         this.filePath = filePath;
     }
 
     //Reads the raw data from the target file
+    @Override
     public List<FileInput> readRawData() {
         List<FileInput> rawData = new ArrayList<>();
         try {

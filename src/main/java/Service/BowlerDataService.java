@@ -2,13 +2,12 @@ package main.java.Service;
 
 import main.java.Model.FileInput;
 import main.java.Model.Bowler;
-import main.java.Model.ScoringFrame;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileVerificationService {
+public class BowlerDataService {
 
     public List<Bowler> createBowlerList(List<FileInput> rawData) {
 
@@ -27,7 +26,7 @@ public class FileVerificationService {
         for(String name : distinctPlayers){
             Bowler bowler = new Bowler(new ArrayList<>());
             bowler.setName(name);
-            bowler.setPinfalls(validatePinfallInputs(name, rawData));
+            bowler.setPinfalls(generatePinfallInputs(name, rawData));
             bowler.setScores(bowler.calculateScore());
 //            System.out.println(bowler);
             bowlerList.add(bowler);
@@ -36,7 +35,7 @@ public class FileVerificationService {
         return bowlerList;
     }
 
-    public List<String> validatePinfallInputs(String name, List<FileInput> data) {
+    public List<String> generatePinfallInputs(String name, List<FileInput> data) {
         List<String> pinfalls = new ArrayList<>();
         //Checking the pinfall values for each name
         for (FileInput element : data) {

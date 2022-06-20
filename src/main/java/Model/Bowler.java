@@ -89,7 +89,7 @@ public class Bowler implements IPlayer {
 
         }
 
-//        scoringFrame.forEach(frame -> System.out.println(frame));
+        scoringFrame.forEach(frame -> System.out.println(frame));
         return scores;
     }
 

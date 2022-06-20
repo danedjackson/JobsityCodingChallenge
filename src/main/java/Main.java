@@ -1,15 +1,21 @@
 package main.java;
 
-import main.java.Service.FileVerificationService;
-import main.java.Service.ReaderService;
-import main.java.Service.WriterService;
+import main.java.Service.BowlerDataService;
+import main.java.Service.FileReaderService;
+import main.java.Service.ConsoleWriterService;
+import main.java.Service.Validation.FrameSizeValidator;
+import main.java.Service.Validation.PinfallContentValidator;
 
 public class Main {
     public static void main(String args[]) {
-        ReaderService reader = new ReaderService("C:\\Users\\Dane\\Documents\\Projects\\Jobsity\\JavaChallenge\\src\\test\\resources\\positive\\scores.txt");
+        FileReaderService reader = new FileReaderService("C:\\Users\\Dane\\Documents\\Projects\\Jobsity\\JavaChallenge\\src\\test\\resources\\positive\\scores.txt");
 
+        FrameSizeValidator frameSizeValidator = new FrameSizeValidator();
+        PinfallContentValidator pinfallContentValidator = new PinfallContentValidator();
 
-        WriterService writer = new WriterService(new FileVerificationService().createBowlerList(reader.readRawData()));
-        writer.printScores();
+        System.out.println(pinfallContentValidator.validate(reader.readRawData()));
+
+        ConsoleWriterService writer = new ConsoleWriterService(new BowlerDataService().createBowlerList(reader.readRawData()));
+        writer.writeScores();
     }
 }
