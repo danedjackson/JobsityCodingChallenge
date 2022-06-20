@@ -16,10 +16,12 @@ public class PinfallContentValidator implements IValidator<FileInput> {
                 try{
                     pinfallValue = Integer.parseInt(bowlerData.getPinfall());
                 }catch(NumberFormatException e) {
+                    System.out.println("Failed to parse pinfall data, invalid data provided.");
                     isValid = false;
                     break;
                 }
                 if(pinfallValue < 0 || pinfallValue > 10){
+                    System.out.println("Invalid score provided, only scores of 0 to 10 are accepted.");
                     isValid = false;
                     break;
                 }

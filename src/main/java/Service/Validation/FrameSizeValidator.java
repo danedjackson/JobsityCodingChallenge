@@ -9,6 +9,11 @@ public class FrameSizeValidator implements IValidator<ScoringFrame> {
 
     @Override
     public boolean validate(List<ScoringFrame> bowlerInputData) {
-        return bowlerInputData.size() == 11 ? true : false;
+        if (bowlerInputData.size() == 11) {
+            return true;
+        } else {
+            System.out.println("Incorrect number of scores provided.");
+            return false;
+        }
     }
 }
