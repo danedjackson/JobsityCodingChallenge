@@ -22,7 +22,7 @@ public class BowlerScoreTest {
     }
 
     @Test
-    void jeffFirstFrameEqualsStrike() {
+    void jeffFirstFrameEqualsStrikeFromDoubleScoreFile() {
         FileReaderService fileReaderService = new FileReaderService(
                 "C:\\Users\\Dane\\Documents\\Projects\\Jobsity\\JavaChallenge\\src\\test\\resources\\positive\\scores.txt");
 
@@ -32,5 +32,18 @@ public class BowlerScoreTest {
         ScoringFrame scoringFrame = bowler.get(0).getScoringFrame().get(0);
 
         assert scoringFrame.getSecondScore().equalsIgnoreCase("x");
+    }
+
+    @Test
+    void johnTotalPointsEquals151FromDoubleScoreFile() {
+        FileReaderService fileReaderService = new FileReaderService(
+                "C:\\Users\\Dane\\Documents\\Projects\\Jobsity\\JavaChallenge\\src\\test\\resources\\positive\\scores.txt");
+
+        List<Bowler> bowlerList = new BowlerDataService().createBowlerList(fileReaderService.readRawData());
+        List<Bowler> bowler = bowlerList.stream().filter(b -> b.getName().equalsIgnoreCase("john")).collect(Collectors.toList());
+
+        Bowler john = bowler.get(0);
+
+        assert john.getScores().get(john.getScores().size()-1) == 151;
     }
 }

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 public class FileReaderServiceTest {
 
     @Test
-    void scoreFileHasData() {
+    void doubleScoreFileHasData() {
         FileReaderService fileReaderService =
                 new FileReaderService("C:\\Users\\Dane\\Documents\\Projects\\Jobsity\\JavaChallenge\\src\\test\\resources\\positive\\scores.txt");
         assert fileReaderService.readRawData().size() > 0;

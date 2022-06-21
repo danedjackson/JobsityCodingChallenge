@@ -2,6 +2,7 @@ package main.java.Service;
 
 import main.java.Model.FileInput;
 import main.java.Model.Bowler;
+import main.java.Model.ScoringFrame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,15 @@ public class BowlerDataService {
         }
 
         return bowlerList;
+    }
+
+    public Bowler createBowler(List<FileInput> rawData) {
+        Bowler bowler = new Bowler(new ArrayList<>());
+        bowler.setName(rawData.get(0).getName());
+        bowler.setPinfalls(generatePinfallInputs(bowler.getName(), rawData));
+        bowler.setScores(bowler.calculateScore());
+
+        return bowler;
     }
 
     public List<String> generatePinfallInputs(String name, List<FileInput> data) {

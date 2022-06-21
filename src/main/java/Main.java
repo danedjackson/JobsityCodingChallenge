@@ -1,13 +1,11 @@
 package main.java;
 
 import main.java.Model.Bowler;
-import main.java.Service.BowlerDataService;
-import main.java.Service.FileReaderService;
-import main.java.Service.ConsoleWriterService;
-import main.java.Service.UserPromptService;
+import main.java.Service.*;
 import main.java.Service.Validation.FrameSizeValidator;
 import main.java.Service.Validation.PinfallContentValidator;
 
+import java.io.File;
 import java.util.List;
 
 public class Main {
@@ -40,5 +38,9 @@ public class Main {
         //Displaying scores to output window
         ConsoleWriterService writer = new ConsoleWriterService(bowlerList);
         writer.writeScores();
+
+
+        FileWriterService writer1 = new FileWriterService(bowlerList);
+        writer1.writeScores();
     }
 }
