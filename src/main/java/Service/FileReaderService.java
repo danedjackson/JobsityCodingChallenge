@@ -26,7 +26,7 @@ public class FileReaderService implements IReader {
                 rawData.add(new FileInput(data[0], data[1]));
             }
         } catch(FileNotFoundException e) {
-            System.out.println("The file could not be found, please verify that you have entered the correct file path.");
+            //Handled by validation
         }
         return rawData;
     }

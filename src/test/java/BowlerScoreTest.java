@@ -18,7 +18,7 @@ public class BowlerScoreTest {
         List<Bowler> bowlerList = new BowlerDataService().createBowlerList(fileReaderService.readRawData());
         List<Integer> scores = bowlerList.get(0).calculateScore();
 
-        assert scores.get(scores.size()-2) == 300;
+        assert scores.get(scores.size()-1) == 300;
     }
 
     @Test

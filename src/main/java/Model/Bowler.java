@@ -4,6 +4,7 @@ import main.java.Interface.IPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Bowler implements IPlayer {
     private String name;
@@ -61,11 +62,13 @@ public class Bowler implements IPlayer {
     @Override
     public List<Integer> calculateScore() {
         List<Integer> scores = new ArrayList<>();
+
         Integer runningScore = 0;
         for(int i = 0; i < pinfalls.size() - 1; i++) {
             if(MAX_PINS - Integer.parseInt(pinfalls.get(i)) == 0) {
                 //Strike
                 scoringFrame.add(new ScoringFrame(" ", "X"));
+                //Calculate the total points for the strike frame by adding 3 more bowls.
                 for(int x = 0; x < 3; x++) {
                     if( i + x <= pinfalls.size() -1 ) {
                         runningScore += Integer.parseInt(pinfalls.get(i + x));
@@ -73,24 +76,28 @@ public class Bowler implements IPlayer {
                 }
                 scores.add(runningScore);
             }
+            //If current index plus following index equals 10, then a spare has been achieved.
             else if(MAX_PINS - (Integer.parseInt(pinfalls.get(i)) + Integer.parseInt(pinfalls.get(i+1))) == 0) {
                 //Spare
                 scoringFrame.add(new ScoringFrame(String.valueOf(pinfalls.get(i)), "/"));
+                //Calculate the total points for the spare frame by adding 1 more bowl.
                 runningScore += MAX_PINS + Integer.parseInt(pinfalls.get(i + 2));
                 scores.add(runningScore);
                 i++;
             }
             else {
+                //No strikes nor spares achieved, add frame normally.
                 scoringFrame.add(new ScoringFrame(pinfalls.get(i), pinfalls.get(i+1)));
                 runningScore += Integer.parseInt(pinfalls.get(i)) + Integer.parseInt(pinfalls.get(i + 1));
                 scores.add(runningScore);
                 i++;
             }
-
         }
+        //Removing last index
+        scores.remove(scores.size()-1);
 
-//        scoringFrame.forEach(frame -> System.out.println(frame));
         return scores;
     }
+
 
 }

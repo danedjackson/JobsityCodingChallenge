@@ -28,7 +28,6 @@ public class BowlerDataService {
             bowler.setName(name);
             bowler.setPinfalls(generatePinfallInputs(name, rawData));
             bowler.setScores(bowler.calculateScore());
-//            System.out.println(bowler);
             bowlerList.add(bowler);
         }
 
@@ -43,21 +42,8 @@ public class BowlerDataService {
                 //Set pinfall value to 0 if "F" is input
                 //TODO:(not sure if I want to change this, possibly have a static function to filter Fouls later
                 if (element.getPinfall().equalsIgnoreCase("f")) element.setPinfall("0");
-                //Trying to parse integer from pinfall value
-                try {
-                    Integer value = Integer.parseInt(element.getPinfall());
-                    if ((value >= 0 && value <= 10)) {
-                        pinfalls.add(element.getPinfall());
-                    }
-                    //TODO:Handle if value is invalid here
-                    else {
-                        throw new IllegalArgumentException(
-                                "Could not load the selected file due to incorrect inputs.");
-                    }
-                } catch (NumberFormatException e) {
-                    throw new NumberFormatException(
-                            "Could not load the selected file due to incorrect inputs.");
-                }
+
+                pinfalls.add(element.getPinfall());
             }
         }
         return pinfalls;

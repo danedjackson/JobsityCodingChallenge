@@ -11,7 +11,7 @@ public class PinfallContentValidator implements IValidator<FileInput> {
         boolean isValid = true;
         int pinfallValue = 0;
         if (bowlerInputData.isEmpty()) {
-            System.out.println("The file provided is empty.");
+            System.out.println("The file provided is empty or does not exist.");
             isValid = false;
         } else {
             for(FileInput bowlerData : bowlerInputData){
