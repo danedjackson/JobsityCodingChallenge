@@ -6,13 +6,14 @@ import main.java.Service.BowlerDataService;
 import main.java.Service.FileReaderService;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileReader;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class BowlerScoreTest {
     @Test
     void perfectScoreAmountsTo300() {
-        FileReaderService fileReaderService = new FileReaderService(
+        FileReaderService fileReaderService = createFileReaderService(
                 "C:\\Users\\Dane\\Documents\\Projects\\Jobsity\\JavaChallenge\\src\\test\\resources\\positive\\perfect.txt");
 
         List<Bowler> bowlerList = new BowlerDataService().createBowlerList(fileReaderService.readRawData());
@@ -23,7 +24,7 @@ public class BowlerScoreTest {
 
     @Test
     void jeffFirstFrameEqualsStrikeFromDoubleScoreFile() {
-        FileReaderService fileReaderService = new FileReaderService(
+        FileReaderService fileReaderService = createFileReaderService(
                 "C:\\Users\\Dane\\Documents\\Projects\\Jobsity\\JavaChallenge\\src\\test\\resources\\positive\\scores.txt");
 
         List<Bowler> bowlerList = new BowlerDataService().createBowlerList(fileReaderService.readRawData());
@@ -36,7 +37,7 @@ public class BowlerScoreTest {
 
     @Test
     void johnTotalPointsEquals151FromDoubleScoreFile() {
-        FileReaderService fileReaderService = new FileReaderService(
+        FileReaderService fileReaderService = createFileReaderService(
                 "C:\\Users\\Dane\\Documents\\Projects\\Jobsity\\JavaChallenge\\src\\test\\resources\\positive\\scores.txt");
 
         List<Bowler> bowlerList = new BowlerDataService().createBowlerList(fileReaderService.readRawData());
@@ -45,5 +46,18 @@ public class BowlerScoreTest {
         Bowler john = bowler.get(0);
 
         assert john.getScores().get(john.getScores().size()-1) == 151;
+    }
+
+    @Test
+    void zeroTotalScoreFromZeroScoreFile() {
+        FileReaderService fileReaderService =
+                createFileReaderService("C:\\Users\\Dane\\Documents\\Projects\\Jobsity\\JavaChallenge\\src\\test\\resources\\custom\\dane-zero-scores.txt");
+        Bowler bowler = new BowlerDataService().createBowler(fileReaderService.readRawData());
+
+        assert bowler.getScores().get(bowler.getScores().size() - 1) == 0;
+    }
+
+    FileReaderService createFileReaderService(String path) {
+        return new FileReaderService(path);
     }
 }

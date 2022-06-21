@@ -39,8 +39,10 @@ public class Main {
         ConsoleWriterService writer = new ConsoleWriterService(bowlerList);
         writer.writeScores();
 
-
-        FileWriterService writer1 = new FileWriterService(bowlerList);
-        writer1.writeScores();
+        //Asking if the user wants a file to be generated with the score information
+        if(userPromptService.writeToFile()) {
+            FileWriterService fileWriterService = new FileWriterService(bowlerList);
+            fileWriterService.writeScores();
+        }
     }
 }
