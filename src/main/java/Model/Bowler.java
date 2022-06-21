@@ -93,8 +93,14 @@ public class Bowler implements IPlayer {
                 i++;
             }
         }
-        //Removing last index
-        scores.remove(scores.size()-1);
+        //Final (11th) frame's first element serves as the last element of the 10th frame.
+        //Facilitating inputs where the final frame is not populated
+        if(scoringFrame.size() == 10) {
+            scoringFrame.add(new ScoringFrame(pinfalls.get(pinfalls.size()-1), " "));
+        }else {
+            //Removing last index where the final (11th) frame is summed.
+            scores.remove(scores.size() - 1);
+        }
 
         return scores;
     }
