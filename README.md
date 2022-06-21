@@ -17,20 +17,16 @@ and it will return the pinfall display as well as the scores of each frame.
 ### How It Works
 Bowling Score Calculator is designed to accept a file such as the one provided below. The file should contain the player name, and their scores (tab separated).
 
-<center>
 
 ![Input](https://i.imgur.com/Dommnu1.png "Sample input file")
 
-</center>
 Objects are then created from the input to represent the scoring frames (each bowling round). The scores are also calculated systematically as these frames are generated.
 
 The pinfall scores, and the running score per bowler from the file is then generated. An example provided below:
 
-<center>
 
 ![Output](https://i.imgur.com/ry5ZR3U.png "Sample output")
 
-</center>
 
 ---
 ---
@@ -61,11 +57,6 @@ These files will be generated under the "\JavaChallenge\scores\" folder as text 
   
 ![Example gif](https://s8.gifyu.com/images/ezgif.com-gif-maker09233aef041dcdfc.gif)
 
-- Type in the following command to run the compiled jar file:
-```java -jar JavaChallenge.jar```
-### Limitations
-- Bowling scores with less that 10 rounds is not permitted; scores can only be generated if all 10 bowling rounds are provided.
-- The displaying of Fouls are represented as 0 on the score output.
 
 [comment]: <> (#### Opening in IntelliJ)
 
@@ -74,4 +65,13 @@ These files will be generated under the "\JavaChallenge\scores\" folder as text 
 [comment]: <> (- Once opened, click File > Project Structure > Project Settings > Project and select "version 16" under Project SDK and "16 - Records, patterns, local enums and interfaces" under Project language level.)
 
 [comment]: <> (- Select "Add Configuration" > "Add New" > "Application")
+
+
+
+- Type in the following command to run the compiled jar file:
+```java -jar JavaChallenge.jar```
+### Current Limitations 
+- Bowling scores with less than 10 rounds is not permitted; scores can only be generated if all 10 bowling rounds are provided.
+- The displaying of Fouls are represented as 0 on the score output.
+- Reads one file each run.
 
