@@ -1,12 +1,9 @@
-<h1><center> Java Challenge </center></h1>
-<h2><center>Bowling Score Calculator</center></h2>
+# Java Challenge
+## Bowling Score Calculator
 
-<center>
 
 ![alt text](https://media.istockphoto.com/vectors/bowling-score-sheet-blank-template-scoreboard-with-game-objects-vector-id515068760?s=612x612 
 "Bowling")
-
-</center>
 
 ### Description
 This project is a console application developed in Java.  
@@ -58,18 +55,39 @@ These files will be generated under the "\JavaChallenge\scores\" folder as text 
 ![Example gif](https://s8.gifyu.com/images/ezgif.com-gif-maker09233aef041dcdfc.gif)
 
 
-[comment]: <> (#### Opening in IntelliJ)
-
-[comment]: <> (- Open IntelliJ and click File > Open, then navigate to this "JavaChallenge" folder and click OK.)
-
-[comment]: <> (- Once opened, click File > Project Structure > Project Settings > Project and select "version 16" under Project SDK and "16 - Records, patterns, local enums and interfaces" under Project language level.)
-
-[comment]: <> (- Select "Add Configuration" > "Add New" > "Application")
-
-
-
 - Type in the following command to run the compiled jar file:
-```java -jar JavaChallenge.jar```
+  ```java -jar JavaChallenge.jar```
+  
+#### Opening in IntelliJ
+
+- Open IntelliJ and click File > Open, then navigate to this "JavaChallenge" folder and click OK.
+
+- Once opened, click File > Project Structure > Libraries > Select "Java Challenge", then click the "-" icon to remove it > Click OK on pop up
+  
+![Removing library from project](https://s8.gifyu.com/images/ezgif.com-gif-maker-2710ab76aa3e65800.gif)
+
+- Next click the "+" icon to add a new Library > Click "From Maven..." > Copy ```junit:junit:4.13.1``` and paste this value in the text box > Click OK.
+
+- Click the "+" icon again, and repeat the step above, copying and pasting ```org.junit.jupiter:junit-jupiter:5.7.0``` instead.
+
+- Click "Apply"
+
+![Adding JUnit libraries](https://s8.gifyu.com/images/ezgif.com-gif-maker-321f29ad10548f257.gif)
+
+- In the Project Structure window from above, go to Project > Select version 16 under Project SDK > Ensure that "16 - Records, patterns, local enums and interfaces" is selected under Project language level.
+
+![Setting SDK](https://s8.gifyu.com/images/ezgif.com-gif-maker-4febb4f5839b1c1af.gif)
+
+- We may need to invalidate our cache and reload the project. Click on File > Invalidate Caches... > Make sure "Clear downloaded shared indexes" is selected > Click "Invalidate and Restart"
+
+- Finally, when the project has opened and loaded after the restart, select Add Configuration > Add New > Application > Click the clipboard icon in the "Main Class" text box, you should see the Main class of the project as a dropdown. Select it and click "OK".
+
+- In the Name textbox, we can type "Main".
+
+![Add Configuration](https://s8.gifyu.com/images/ezgif.com-gif-maker-5cc688303893b1b92.gif)
+
+Now the project should be set up in IntelliJ with JUnit for the test cases to run correctly.
+
 ### Current Limitations 
 - Bowling scores with less than 10 rounds is not permitted; scores can only be generated if all 10 bowling rounds are provided.
 - The displaying of Fouls are represented as 0 on the score output.
